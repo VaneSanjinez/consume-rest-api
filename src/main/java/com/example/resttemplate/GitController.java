@@ -20,7 +20,7 @@ public class GitController {
     @RequestMapping(value="/get", method = RequestMethod.GET)
     public ResponseEntity<String> getGit(){
         ResponseEntity<String> response =null;
-        response = gitUtil.getRequest("cxXdxSAm8KmZZe7RZ7i6","products-store");
+        response = gitUtil.getRequest("cxXdxSAm8KmZZe7RZ7i6",new Long(18625237));
         System.out.println(response);
         return response;
     }

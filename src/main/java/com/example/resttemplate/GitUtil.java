@@ -11,10 +11,10 @@ public class GitUtil {
     @Autowired
     GitService gitService;
 
-    public ResponseEntity<String> getRequest(String privateToken, String projectName) {
+    public ResponseEntity<String> getRequest(String privateToken, Long projectId) {
         ResponseEntity<String> response = null;
         System.out.println("At git util class");
-        response = gitService.getGitResponse(privateToken,projectName);
+        response = gitService.getProjectDetail(privateToken,projectId);
         return response;
 
     }
