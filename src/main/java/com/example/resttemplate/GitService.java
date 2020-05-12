@@ -11,10 +11,7 @@ import com.example.resttemplate.util.Constants;
 public class GitService {
 
     String baseUrl = Constants.BASE_GITLAB_URL;
-//    public ResponseEntity<String> getGitResponse(String privateToken, String projectName) {
     public ResponseEntity<String> getProjectDetail(String privateToken, Long projectId) {
-
-//        String url = "http://gitlab.com/api/v4/projects?private_token="+privateToken+"&search="+projectName;
 //        String url = "https://gitlab.com/api/v4/projects/18625237?private_token=XiL9rQmkMjmz8z9AQijY";
         String url = baseUrl +"/{project-id}?private_token={privateToken}";
         RestTemplate restTemplate = new RestTemplate();
