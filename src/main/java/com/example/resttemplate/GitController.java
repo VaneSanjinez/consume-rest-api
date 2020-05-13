@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+//@RequestMapping(path ="/api")
+@RequestMapping(path = "${v1API}/")
 public class GitController {
 
     @Autowired
@@ -17,7 +19,7 @@ public class GitController {
         return "Hi!";
     }
 
-    @RequestMapping(value="/api/get/project", method = RequestMethod.GET)
+    @RequestMapping(value="get/project", method = RequestMethod.GET)
     public ResponseEntity<String> getGit(){
         ResponseEntity<String> response =null;
         response = gitUtil.getRequest("cxXdxSAm8KmZZe7RZ7i6", 18625237L);
