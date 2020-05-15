@@ -1,5 +1,6 @@
-package com.example.resttemplate;
+package com.example.resttemplate.util;
 
+import com.example.resttemplate.Service.GitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
