@@ -1,4 +1,4 @@
-package com.example.resttemplate;
+package com.example.resttemplate.service;
 
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

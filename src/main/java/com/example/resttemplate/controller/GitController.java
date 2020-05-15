@@ -1,5 +1,8 @@
-package com.example.resttemplate;
+package com.example.resttemplate.controller;
 
+import com.example.resttemplate.util.GitUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,13 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 //@RequestMapping(path ="/api")
-@RequestMapping(path = "${v1API}/")
+//@RequestMapping(path = "${v1API}/")
+@Api(value = "Gitlab microservice", description = "This API has a CRUD to consume GITLAB API")
 public class GitController {
 
     @Autowired
     GitUtil gitUtil;
 
+
     @RequestMapping(value="/hello")
+    @ApiOperation(value = "Test controller", notes = "Return a greetings String " )
     public String hello(){
         return "Hi!";
     }
