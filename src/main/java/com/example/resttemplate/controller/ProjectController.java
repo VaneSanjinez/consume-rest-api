@@ -5,9 +5,7 @@ import com.example.resttemplate.util.ProjectUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping (value="/projects")
@@ -19,8 +17,16 @@ public class ProjectController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Object[]> getAllProjects(){
-        ResponseEntity<Object[]> response =null;
+        ResponseEntity<Object[]> response;
         response = projectUtil.getAllProjects();
+        System.out.println(response);
+        return response;
+    }
+
+    @RequestMapping(value="/{userId}", method= RequestMethod.GET)
+    public ResponseEntity<Object[]> getAllProjectsByUserId(@PathVariable("userId") String userid, @RequestParam String privateToken){
+        ResponseEntity<Object[]> response;
+        response = projectUtil.getProjectsByUserId(userid, privateToken);
         System.out.println(response);
         return response;
     }

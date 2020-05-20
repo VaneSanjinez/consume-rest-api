@@ -39,4 +39,22 @@ public class ProjectService {
         return response;
     }
 
+    public ResponseEntity<Object[]> getProjectsByUserId(String userid, String privateToken) {
+        String url = baseUrl + "/users/" + userid + "/projects?private_token=" + privateToken;
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity request = new HttpEntity(headers);
+
+        ResponseEntity<Object[]> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                Object[].class,
+                userid,
+                privateToken
+        );
+        return response;
+
+    }
 }
