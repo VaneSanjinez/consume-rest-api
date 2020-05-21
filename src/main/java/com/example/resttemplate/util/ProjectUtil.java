@@ -33,4 +33,10 @@ public class ProjectUtil {
         }
         return projectsByUserId;
     }
+
+    public ResponseEntity<String> getProjectById(int projectId, String privateToken) {
+        ResponseEntity<String> projectById;
+        projectById = projectService.getProjectById(projectId, privateToken);
+        return projectById;
+    }
 }

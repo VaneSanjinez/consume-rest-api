@@ -22,12 +22,19 @@ public class ProjectController {
         System.out.println(response);
         return response;
     }
-
-    @RequestMapping(value="/{userId}", method= RequestMethod.GET)
+    //Should this be here? or not
+    @RequestMapping(value="/users/{userId}", method= RequestMethod.GET)
     public ResponseEntity<Object[]> getAllProjectsByUserId(@PathVariable("userId") String userid, @RequestParam String privateToken){
         ResponseEntity<Object[]> response;
         response = projectUtil.getProjectsByUserId(userid, privateToken);
         System.out.println(response);
+        return response;
+    }
+
+    @RequestMapping(value = "/{projectId}", method=RequestMethod.GET)
+    public ResponseEntity<String> getProjectById (@PathVariable("projectId") int projectId, @RequestParam String privateToken){
+        ResponseEntity<String> response;
+        response = projectUtil.getProjectById(projectId, privateToken);
         return response;
     }
 }

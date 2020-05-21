@@ -57,4 +57,22 @@ public class ProjectService {
         return response;
 
     }
+
+    public ResponseEntity<String> getProjectById(int projectId, String privateToken) {
+        String url = baseUrl + "/projects/" + projectId + "?private_token="+privateToken;
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity request = new HttpEntity(headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                String.class,
+                projectId,
+                privateToken
+        );
+        return response;
+    }
 }
