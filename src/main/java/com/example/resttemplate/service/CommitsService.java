@@ -28,4 +28,25 @@ public class CommitsService {
         );
         return response;
     }
+
+    public ResponseEntity<String> getCommitById(String commitId,int projectId, String privateToken) {
+        ///projects/:id/repository/commits/:sha
+        String url = baseUrl + "projects/" + projectId + "/repository/commits/"+ commitId +"?private_token=" + privateToken;
+        System.out.println(url);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity request = new HttpEntity(headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                String.class,
+                projectId,
+                commitId,
+                privateToken
+        );
+        return response;
+    }
 }
