@@ -1,6 +1,8 @@
 package com.example.resttemplate.service;
 
 import com.example.resttemplate.util.Constants;
+import com.example.resttemplate.util.Util;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -10,17 +12,16 @@ import java.util.Collections;
 @Service
 public class ProjectService {
 
+    @Autowired
+    Util generalUtil;
+
     String baseUrl = Constants.BASE_GITLAB_URL;
 
     public ResponseEntity<Object[]> getAllProjects() {
         String url = baseUrl +"projects/";
         RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity request = generalUtil.setHeaderToRestTemplate();
 
-
-        HttpEntity request = new HttpEntity(headers);
         ResponseEntity<Object[]> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -40,11 +41,12 @@ public class ProjectService {
     }
 
     public ResponseEntity<Object[]> getProjectsByUserId(String userid, String privateToken) {
-        String url = baseUrl + "/users/" + userid + "/projects?private_token=" + privateToken;
+        //https://gitlab.com/api/v4/users/vane-sanjinez/projects?private_token=cxXdxSAm8KmZZe7RZ7i6
+        String url = baseUrl + "users/" + userid + "/projects?private_token=" + privateToken;
+//        System.out.println("https://gitlab.com/api/v4/users/vane-sanjinez/projects?private_token=cxXdxSAm8KmZZe7RZ7i6");
+//        System.out.println(url);
         RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity request = new HttpEntity(headers);
+        HttpEntity request = generalUtil.setHeaderToRestTemplate();
 
         ResponseEntity<Object[]> response = restTemplate.exchange(
                 url,
@@ -61,9 +63,7 @@ public class ProjectService {
     public ResponseEntity<String> getProjectById(int projectId, String privateToken) {
         String url = baseUrl + "/projects/" + projectId + "?private_token="+privateToken;
         RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity request = new HttpEntity(headers);
+        HttpEntity request = generalUtil.setHeaderToRestTemplate();
 
         ResponseEntity<String> response = restTemplate.exchange(
                 url,
@@ -73,6 +73,7 @@ public class ProjectService {
                 projectId,
                 privateToken
         );
+        System.out.println(response.getBody());
         return response;
     }
 }
