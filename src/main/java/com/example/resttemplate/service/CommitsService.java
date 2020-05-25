@@ -5,8 +5,11 @@ import com.example.resttemplate.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.*;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class CommitsService {
@@ -48,5 +51,31 @@ public class CommitsService {
                 privateToken
         );
         return response;
+    }
+
+    public ResponseEntity<Object[]> getCommitsSince(String projectId, String since, String privateToken) {
+//        String url = baseUrl + "projects/" + projectId + "/repository/commits?since=" + since.toString() + "&privateToken=" + privateToken;
+        String url = baseUrl + "projects/" + projectId +"/repository/commits";
+        RestTemplate restTemplate = new RestTemplate();
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url);
+        builder.queryParam("since", since);
+        builder.queryParam("privateToken", privateToken);
+
+        String uri= builder.build().encode().toUriString();
+
+        System.out.println("URI: " + uri);
+        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+        ResponseEntity<Object[]> response = restTemplate.exchange(
+//                url,
+                uri,
+                HttpMethod.GET,
+                request,
+                Object[].class,
+                projectId
+//                since,
+//                privateToken
+        );
+        return response;
+
     }
 }

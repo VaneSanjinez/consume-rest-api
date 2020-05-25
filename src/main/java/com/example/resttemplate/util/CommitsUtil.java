@@ -42,4 +42,10 @@ public class CommitsUtil {
         }
                 return commitById;
     }
+
+    public ResponseEntity<Object[]> getCommitsSince(String projectId, String since, String privateToken) {
+        ResponseEntity<Object[]> commitsSince = null;
+        commitsSince = commitsService.getCommitsSince(projectId, since, privateToken);
+        return commitsSince;
+    }
 }
