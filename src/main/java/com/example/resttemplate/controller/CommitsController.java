@@ -47,7 +47,7 @@ public class CommitsController {
     }
 
     @RequestMapping(value="/{projectId}/dates", method = RequestMethod.GET)
-    public ResponseEntity<Object[]> getCommitsSinceUntil(@PathVariable("projcetId") String projectId,
+    public ResponseEntity<Object[]> getCommitsSinceUntil(@PathVariable("projectId") String projectId,
                                                          @RequestParam String since,
                                                          @RequestParam String until,
                                                          @RequestParam String privateToken){
