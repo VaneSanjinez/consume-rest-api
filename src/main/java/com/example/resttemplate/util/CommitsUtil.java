@@ -44,8 +44,18 @@ public class CommitsUtil {
     }
 
     public ResponseEntity<Object[]> getCommitsSince(String projectId, String since, String privateToken) {
-        ResponseEntity<Object[]> commitsSince = null;
+        ResponseEntity<Object[]> commitsSince;
         commitsSince = commitsService.getCommitsSince(projectId, since, privateToken);
         return commitsSince;
+    }
+
+    public ResponseEntity<Object[]> getCommitsUntil(String projectId, String until, String privateToken) {
+        ResponseEntity<Object[]> commitsUntil = null;
+        try{
+            commitsUntil = commitsService.getCommitsUntil(projectId,until,privateToken);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return commitsUntil;
     }
 }
