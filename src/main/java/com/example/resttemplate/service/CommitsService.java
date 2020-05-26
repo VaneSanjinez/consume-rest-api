@@ -99,4 +99,28 @@ public class CommitsService {
         );
         return response;
     }
+
+    public ResponseEntity<Object[]> getCommitsSinceUntil(String projectId, String since, String until, String privateToken) {
+//        https://gitlab.com/api/v4/projects/18625237/repository/commits?since=2019-02-15&until=2019-02-18&privateToken=cxXdxSAm8KmZZe7RZ7i6
+        String url = baseUrl + "projects/" + projectId + "/repository/commits";
+        System.out.println(url);
+        RestTemplate restTemplate = new RestTemplate();
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url);
+        builder.queryParam("since", since);
+        builder.queryParam("until", until);
+        builder.queryParam("privateToken", privateToken);
+        System.out.println("****");
+        String uri = builder.build().encode().toUriString();
+        System.out.println(uri);
+        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+        ResponseEntity<Object[]> response = restTemplate.exchange(
+                uri,
+                HttpMethod.GET,
+                request,
+                Object[].class,
+                projectId
+        );
+        return response;
+
+    }
 }
