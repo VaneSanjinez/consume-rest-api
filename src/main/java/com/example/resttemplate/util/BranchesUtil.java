@@ -26,4 +26,21 @@ public class BranchesUtil {
         }
         return branchesByProjectId;
     }
+
+    public ResponseEntity<String> getBranchById(int projectId, String branchId, String privateToken) {
+        ResponseEntity<String> branchById =null;
+        try{
+            branchById= branchesService.getBranchById(projectId, branchId,privateToken);
+            if(branchById.getStatusCode().equals(HttpStatus.OK)){
+                return branchById;
+            }
+            else{
+                return null;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return branchById;
+
+    }
 }
