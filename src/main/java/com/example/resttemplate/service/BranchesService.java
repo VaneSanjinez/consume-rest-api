@@ -25,10 +25,9 @@ public class BranchesService {
         String url = baseUrl + "projects/" + projectId + "/repository/branches";
 //        String url = baseUrl + "projects/" + projectId + "/repository/commits";
         RestTemplate restTemplate = new RestTemplate();
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url);
-        builder.queryParam("privateToken", privateToken);
+        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
+        String uri= builder.build().encode().toUriString();
 
-        String uri = builder.build().encode().toUriString();
         System.out.println(uri);
         HttpEntity request = generalUtil.setHeaderToRestTemplate();
         ResponseEntity<Object[]> response = restTemplate.exchange(

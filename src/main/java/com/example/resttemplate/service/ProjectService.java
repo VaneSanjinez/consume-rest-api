@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Collections;
 
@@ -42,14 +43,17 @@ public class ProjectService {
 
     public ResponseEntity<Object[]> getProjectsByUserId(String userid, String privateToken) {
         //https://gitlab.com/api/v4/users/vane-sanjinez/projects?private_token=cxXdxSAm8KmZZe7RZ7i6
-        String url = baseUrl + "users/" + userid + "/projects?private_token=" + privateToken;
+        String url = baseUrl + "users/" + userid + "/projects";
 //        System.out.println("https://gitlab.com/api/v4/users/vane-sanjinez/projects?private_token=cxXdxSAm8KmZZe7RZ7i6");
 //        System.out.println(url);
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity request = generalUtil.setHeaderToRestTemplate();
+        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
+        String uri= builder.build().encode().toUriString();
 
         ResponseEntity<Object[]> response = restTemplate.exchange(
-                url,
+//                url,
+                uri,
                 HttpMethod.GET,
                 request,
                 Object[].class,

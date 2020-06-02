@@ -19,13 +19,17 @@ public class CommitsService {
 
     String baseUrl = Constants.BASE_GITLAB_URL;
     public ResponseEntity<Object[]> getCommitsByProjectId(int projectId, String privateToken) {
-        String url = baseUrl + "projects/" + projectId + "/repository/commits?private_token=" + privateToken;
+        String url = baseUrl + "projects/" + projectId + "/repository/commits";
         System.out.println(url);
+
+        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity request = generalUtil.setHeaderToRestTemplate();
+        String uri= builder.build().encode().toUriString();
 
         ResponseEntity<Object[]> response = restTemplate.exchange(
-                url,
+//                url,
+                uri,
                 HttpMethod.GET,
                 request,
                 Object[].class,
@@ -36,13 +40,16 @@ public class CommitsService {
     }
 
     public ResponseEntity<String> getCommitById(String commitId,int projectId, String privateToken) {
-        String url = baseUrl + "projects/" + projectId + "/repository/commits/"+ commitId +"?private_token=" + privateToken;
+        String url = baseUrl + "projects/" + projectId + "/repository/commits/"+ commitId;
         System.out.println(url);
+        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity request = generalUtil.setHeaderToRestTemplate();
+        String uri= builder.build().encode().toUriString();
 
         ResponseEntity<String> response = restTemplate.exchange(
-                url,
+//                url,
+                uri,
                 HttpMethod.GET,
                 request,
                 String.class,
@@ -57,9 +64,8 @@ public class CommitsService {
 //        String url = baseUrl + "projects/" + projectId + "/repository/commits?since=" + since.toString() + "&privateToken=" + privateToken;
         String url = baseUrl + "projects/" + projectId +"/repository/commits";
         RestTemplate restTemplate = new RestTemplate();
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url);
+        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
         builder.queryParam("since", since);
-        builder.queryParam("privateToken", privateToken);
 
         String uri= builder.build().encode().toUriString();
 
@@ -83,11 +89,10 @@ public class CommitsService {
 //        https://gitlab.com/api/v4/projects/18625237/repository/commits?until=2019-02-19&privateToken=cxXdxSAm8KmZZe7RZ7i6
         String url = baseUrl + "projects/" + projectId + "/repository/commits";
         RestTemplate restTemplate = new RestTemplate();
-        UriComponentsBuilder builer = UriComponentsBuilder.fromUriString(url);
-        builer.queryParam("until", until);
-        builer.queryParam("privateToken", privateToken);
+        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
+        builder.queryParam("until", until);
 
-        String uri = builer.build().encode().toUriString();
+        String uri = builder.build().encode().toUriString();
         System.out.println(uri);
         HttpEntity request = generalUtil.setHeaderToRestTemplate();
         ResponseEntity<Object[]> response = restTemplate.exchange(
@@ -105,11 +110,9 @@ public class CommitsService {
         String url = baseUrl + "projects/" + projectId + "/repository/commits";
         System.out.println(url);
         RestTemplate restTemplate = new RestTemplate();
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url);
+        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
         builder.queryParam("since", since);
         builder.queryParam("until", until);
-        builder.queryParam("privateToken", privateToken);
-        System.out.println("****");
         String uri = builder.build().encode().toUriString();
         System.out.println(uri);
         HttpEntity request = generalUtil.setHeaderToRestTemplate();
