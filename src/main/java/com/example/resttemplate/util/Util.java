@@ -12,6 +12,7 @@ public class Util {
     public HttpEntity setHeaderToRestTemplate(){
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+//        headers.set("Private-Token",privateToken);
         HttpEntity request = new HttpEntity(headers);
 
         return request;

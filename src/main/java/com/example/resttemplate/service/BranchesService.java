@@ -2,7 +2,6 @@ package com.example.resttemplate.service;
 
 import com.example.resttemplate.util.Constants;
 import com.example.resttemplate.util.Util;
-import com.sun.jndi.toolkit.url.Uri;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.sound.midi.Soundbank;
 
 @Service
 public class BranchesService {

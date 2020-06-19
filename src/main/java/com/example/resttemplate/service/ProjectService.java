@@ -47,27 +47,36 @@ public class ProjectService {
 //        System.out.println("https://gitlab.com/api/v4/users/vane-sanjinez/projects?private_token=cxXdxSAm8KmZZe7RZ7i6");
 //        System.out.println(url);
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity request = generalUtil.setHeaderToRestTemplate();
-        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
-        String uri= builder.build().encode().toUriString();
+//        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+//        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
+//        String uri= builder.build().encode().toUriString();
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Private-Token",privateToken);
+        HttpEntity request = new HttpEntity(headers);
 
         ResponseEntity<Object[]> response = restTemplate.exchange(
-//                url,
-                uri,
+                url,
+//                uri,
                 HttpMethod.GET,
                 request,
                 Object[].class,
-                userid,
-                privateToken
+                userid
         );
         return response;
 
     }
 
     public ResponseEntity<String> getProjectById(int projectId, String privateToken) {
-        String url = baseUrl + "/projects/" + projectId + "?private_token="+privateToken;
+        String url = baseUrl + "/projects/" + projectId; //+ "?private_token="+privateToken;
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+//        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Private-Token",privateToken);
+        HttpEntity request = new HttpEntity(headers);
 
         ResponseEntity<String> response = restTemplate.exchange(
                 url,
