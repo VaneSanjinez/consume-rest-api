@@ -69,7 +69,7 @@ public class ProjectService {
 
     }
 
-    public ResponseEntity<String> getProjectById(int projectId, String privateToken) {
+    public ResponseEntity<String> getProjectById(String projectId, String privateToken) {
         String url = baseUrl + "/projects/" + projectId; //+ "?private_token="+privateToken;
         RestTemplate restTemplate = new RestTemplate();
 //        HttpEntity request = generalUtil.setHeaderToRestTemplate();

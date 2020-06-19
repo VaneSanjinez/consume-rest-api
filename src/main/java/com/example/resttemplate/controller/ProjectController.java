@@ -34,7 +34,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/{projectId}", method=RequestMethod.GET)
-    public ResponseEntity<String> getProjectById (@PathVariable("projectId") int projectId,
+    public ResponseEntity<String> getProjectById (@PathVariable("projectId") String projectId,
 //                                                  @RequestParam (required = false)
                                                           String privateToken){
         ResponseEntity<String> response;
