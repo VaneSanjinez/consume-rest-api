@@ -34,10 +34,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/{projectId}", method=RequestMethod.GET)
-    public ResponseEntity<String> getProjectById (@PathVariable("projectId") String projectId,
+    public ResponseEntity<Object> getProjectById (@PathVariable("projectId") String projectId,
 //                                                  @RequestParam (required = false)
                                                           String privateToken){
-        ResponseEntity<String> response;
+        ResponseEntity<Object> response;
         response = projectUtil.getProjectById(projectId, privateToken);
         return response;
     }

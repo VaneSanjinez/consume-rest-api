@@ -69,7 +69,7 @@ public class ProjectService {
 
     }
 
-    public ResponseEntity<String> getProjectById(String projectId, String privateToken) {
+    public ResponseEntity<Object> getProjectById(String projectId, String privateToken) {
         String url = baseUrl + "/projects/" + projectId; //+ "?private_token="+privateToken;
         RestTemplate restTemplate = new RestTemplate();
 //        HttpEntity request = generalUtil.setHeaderToRestTemplate();
@@ -78,13 +78,12 @@ public class ProjectService {
         headers.set("Private-Token",privateToken);
         HttpEntity request = new HttpEntity(headers);
 
-        ResponseEntity<String> response = restTemplate.exchange(
+        ResponseEntity<Object> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 request,
-                String.class,
-                projectId,
-                privateToken
+                Object.class,
+                projectId
         );
         System.out.println(response.getBody());
         return response;
