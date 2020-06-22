@@ -24,17 +24,22 @@ public class CommitsService {
 
         UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity request = generalUtil.setHeaderToRestTemplate();
-        String uri= builder.build().encode().toUriString();
+//        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+//        String uri= builder.build().encode().toUriString();
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Private-Token",privateToken);
+        HttpEntity request = new HttpEntity(headers);
 
         ResponseEntity<Object[]> response = restTemplate.exchange(
-//                url,
-                uri,
+                url,
+//                uri,
                 HttpMethod.GET,
                 request,
                 Object[].class,
-                projectId,
-                privateToken
+                projectId
         );
         return response;
     }

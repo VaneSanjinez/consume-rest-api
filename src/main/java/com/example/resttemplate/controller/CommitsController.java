@@ -12,7 +12,8 @@ public class CommitsController {
     CommitsUtil commitsUtil;
 
     @RequestMapping(value="/{projectId}", method = RequestMethod.GET)
-    ResponseEntity <Object[]> getProjectCommits (@PathVariable("projectId") int projectId, @RequestParam String privateToken){
+    ResponseEntity <Object[]> getProjectCommits (@PathVariable("projectId") int projectId,
+                                                 String privateToken){
         ResponseEntity<Object[]> commitsByProjectId;
         commitsByProjectId = commitsUtil.getCommitsByProjectId(projectId,privateToken);
         return commitsByProjectId;
