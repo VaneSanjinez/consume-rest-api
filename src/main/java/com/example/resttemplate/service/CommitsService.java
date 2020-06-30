@@ -47,14 +47,19 @@ public class CommitsService {
     public ResponseEntity<String> getCommitById(String commitId,int projectId, String privateToken) {
         String url = baseUrl + "projects/" + projectId + "/repository/commits/"+ commitId;
         System.out.println(url);
-        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
+//        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity request = generalUtil.setHeaderToRestTemplate();
-        String uri= builder.build().encode().toUriString();
+//        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+//        String uri= builder.build().encode().toUriString();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Private-Token",privateToken);
+        HttpEntity request = new HttpEntity(headers);
 
         ResponseEntity<String> response = restTemplate.exchange(
-//                url,
-                uri,
+                url,
+//                uri,
                 HttpMethod.GET,
                 request,
                 String.class,
