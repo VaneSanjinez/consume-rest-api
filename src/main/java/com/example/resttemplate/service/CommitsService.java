@@ -74,16 +74,21 @@ public class CommitsService {
 //        String url = baseUrl + "projects/" + projectId + "/repository/commits?since=" + since.toString() + "&privateToken=" + privateToken;
         String url = baseUrl + "projects/" + projectId +"/repository/commits";
         RestTemplate restTemplate = new RestTemplate();
-        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
-        builder.queryParam("since", since);
+//        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
+//        builder.queryParam("since", since);
+//
+//        String uri= builder.build().encode().toUriString();
+//
+//        System.out.println("URI: " + uri);
+//        HttpEntity request = generalUtil.setHeaderToRestTemplate();
 
-        String uri= builder.build().encode().toUriString();
-
-        System.out.println("URI: " + uri);
-        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Private-Token",privateToken);
+        HttpEntity request = new HttpEntity(headers);
         ResponseEntity<Object[]> response = restTemplate.exchange(
-//                url,
-                uri,
+                url,
+//                uri,
                 HttpMethod.GET,
                 request,
                 Object[].class,
@@ -99,14 +104,21 @@ public class CommitsService {
 //        https://gitlab.com/api/v4/projects/18625237/repository/commits?until=2019-02-19&privateToken=cxXdxSAm8KmZZe7RZ7i6
         String url = baseUrl + "projects/" + projectId + "/repository/commits";
         RestTemplate restTemplate = new RestTemplate();
-        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
-        builder.queryParam("until", until);
+//        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
+//        builder.queryParam("until", until);
+//
+//        String uri = builder.build().encode().toUriString();
+//        System.out.println(uri);
+//        HttpEntity request = generalUtil.setHeaderToRestTemplate();
 
-        String uri = builder.build().encode().toUriString();
-        System.out.println(uri);
-        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Private-Token",privateToken);
+        HttpEntity request = new HttpEntity(headers);
+
+
         ResponseEntity<Object[]> response = restTemplate.exchange(
-                uri,
+                url,
                 HttpMethod.GET,
                 request,
                 Object[].class,
@@ -120,14 +132,20 @@ public class CommitsService {
         String url = baseUrl + "projects/" + projectId + "/repository/commits";
         System.out.println(url);
         RestTemplate restTemplate = new RestTemplate();
-        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
-        builder.queryParam("since", since);
-        builder.queryParam("until", until);
-        String uri = builder.build().encode().toUriString();
-        System.out.println(uri);
-        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+//        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
+//        builder.queryParam("since", since);
+//        builder.queryParam("until", until);
+//        String uri = builder.build().encode().toUriString();
+//        System.out.println(uri);
+//        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Private-Token",privateToken);
+        HttpEntity request = new HttpEntity(headers);
+
         ResponseEntity<Object[]> response = restTemplate.exchange(
-                uri,
+                url,
                 HttpMethod.GET,
                 request,
                 Object[].class,

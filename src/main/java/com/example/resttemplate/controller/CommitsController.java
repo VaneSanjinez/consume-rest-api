@@ -33,7 +33,8 @@ public class CommitsController {
     @RequestMapping(value="/{projectId}/since", method=RequestMethod.GET)
     public ResponseEntity<Object[]> getCommitsSince(@PathVariable("projectId") String projectId,
                                                     @RequestParam String since,
-                                                    @RequestParam String privateToken){
+//                                                    @RequestParam
+                                                                String privateToken){
         ResponseEntity<Object[]> commitsSince;
         commitsSince = commitsUtil.getCommitsSince(projectId, since, privateToken);
         return commitsSince;
@@ -42,7 +43,8 @@ public class CommitsController {
     @RequestMapping(value="/{projectId}/until", method = RequestMethod.GET)
     public  ResponseEntity<Object[]> getCommitsUntil(@PathVariable("projectId") String projectId,
                                                      @RequestParam String until,
-                                                     @RequestParam String privateToken){
+//                                                     @RequestParam
+                                                                 String privateToken){
         ResponseEntity<Object[]> commitsUntil;
         commitsUntil = commitsUtil.getCommitsUntil(projectId, until, privateToken);
         return commitsUntil;
@@ -52,7 +54,8 @@ public class CommitsController {
     public ResponseEntity<Object[]> getCommitsSinceUntil(@PathVariable("projectId") String projectId,
                                                          @RequestParam String since,
                                                          @RequestParam String until,
-                                                         @RequestParam String privateToken){
+//                                                         @RequestParam
+                                                                     String privateToken){
         ResponseEntity<Object[]> commitsSinceUntil;
         commitsSinceUntil = commitsUtil.getcommitsSinceUntil(projectId, since, until, privateToken);
         return commitsSinceUntil;
