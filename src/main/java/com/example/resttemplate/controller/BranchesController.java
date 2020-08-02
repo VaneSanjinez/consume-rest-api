@@ -13,7 +13,9 @@ public class BranchesController {
     BranchesUtil branchesUtil;
 
     @RequestMapping(value="/project/{projectId}/branches", method= RequestMethod.GET)
-    ResponseEntity<Object[]> getProjectBranches(@PathVariable("projectId") int projectId, @RequestParam String privateToken){
+    ResponseEntity<Object[]> getProjectBranches(@PathVariable("projectId") int projectId,
+//                                                @RequestParam
+                                                        String privateToken){
         ResponseEntity<Object[]> branchesByProjectId;
          branchesByProjectId= branchesUtil.getBranchesByProjectId(projectId,privateToken);
         return branchesByProjectId;

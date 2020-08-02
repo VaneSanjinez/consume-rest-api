@@ -3,9 +3,7 @@ package com.example.resttemplate.service;
 import com.example.resttemplate.util.Constants;
 import com.example.resttemplate.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -26,10 +24,15 @@ public class BranchesService {
         UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
         String uri= builder.build().encode().toUriString();
 
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Private-Token",privateToken);
+        HttpEntity request = new HttpEntity(headers);
         System.out.println(uri);
-        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+//        HttpEntity request = generalUtil.setHeaderToRestTemplate();
         ResponseEntity<Object[]> response = restTemplate.exchange(
-                uri,
+                url,
                 HttpMethod.GET,
                 request,
                 Object[].class,
