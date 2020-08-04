@@ -27,7 +27,7 @@ public class BranchesUtil {
         return branchesByProjectId;
     }
 
-    public ResponseEntity<String> getBranchById(int projectId, String branchId, String privateToken) {
+    public ResponseEntity<String> getBranchById(String projectId, String branchId, String privateToken) {
         ResponseEntity<String> branchById =null;
         try{
             branchById= branchesService.getBranchById(projectId, branchId,privateToken);

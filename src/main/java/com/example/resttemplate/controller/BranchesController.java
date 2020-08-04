@@ -23,9 +23,10 @@ public class BranchesController {
 
 
         @RequestMapping(value="/project/{projectId}/branches/{branchId}", method = RequestMethod.GET)
-    ResponseEntity<String>getBranchById(@PathVariable ("projectId") int projectId,
+    ResponseEntity<String>getBranchById(@PathVariable ("projectId") String projectId,
                                           @PathVariable ("branchId") String branchId,
-                                          @RequestParam String privateToken){
+//                                          @RequestParam
+                                                String privateToken){
         ResponseEntity<String> branchById;
         branchById = branchesUtil.getBranchById(projectId,branchId,privateToken);
         return branchById;

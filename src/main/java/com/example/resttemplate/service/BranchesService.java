@@ -42,7 +42,7 @@ public class BranchesService {
 
     }
 
-    public ResponseEntity<String> getBranchById(int projectId, String branchId, String privateToken) {
+    public ResponseEntity<String> getBranchById(String projectId, String branchId, String privateToken) {
         //https://gitlab.com/api/v4/projects/3472737/repository/branches/master?private_token=cxXdxSAm8KmZZe7RZ7i6
         String url = baseUrl + "projects/" +projectId+ "/repository/branches/" + branchId;
         RestTemplate restTemplate = new RestTemplate();
@@ -51,8 +51,14 @@ public class BranchesService {
 
         String uri = builder.build().encode().toUriString();
         System.out.println(uri);
-        HttpEntity request = generalUtil.setHeaderToRestTemplate();
-        ResponseEntity<String> response = restTemplate.exchange(
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Private-Token",privateToken);
+        HttpEntity request = new HttpEntity(headers);
+//        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+        ResponseEntity<String> response = restTemplate.
+                exchange(
                 uri,
                 HttpMethod.GET,
                 request,
