@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value="/branches")
+//@RequestMapping(value="/branches")
 public class BranchesController {
 
     @Autowired
@@ -14,7 +14,6 @@ public class BranchesController {
 
     @RequestMapping(value="/project/{projectId}/branches", method= RequestMethod.GET)
     ResponseEntity<Object[]> getProjectBranches(@PathVariable("projectId") int projectId,
-//                                                @RequestParam
                                                         String privateToken){
         ResponseEntity<Object[]> branchesByProjectId;
          branchesByProjectId= branchesUtil.getBranchesByProjectId(projectId,privateToken);
