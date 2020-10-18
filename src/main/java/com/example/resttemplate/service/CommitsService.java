@@ -132,6 +132,10 @@ public class CommitsService {
         String url = baseUrl + "projects/" + projectId + "/repository/commits";
         System.out.println(url);
         RestTemplate restTemplate = new RestTemplate();
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url);
+        builder.queryParam("until", until);
+        builder.queryParam("since", since);
+        String uri = builder.build().encode().toUriString();
 //        UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
 //        builder.queryParam("since", since);
 //        builder.queryParam("until", until);
@@ -145,7 +149,8 @@ public class CommitsService {
         HttpEntity request = new HttpEntity(headers);
 
         ResponseEntity<Object[]> response = restTemplate.exchange(
-                url,
+//                url,
+                uri,
                 HttpMethod.GET,
                 request,
                 Object[].class,
