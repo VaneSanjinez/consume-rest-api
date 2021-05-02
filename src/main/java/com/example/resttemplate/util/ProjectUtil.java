@@ -13,8 +13,8 @@ public class ProjectUtil {
     ProjectService projectService;
 
 
-    public ResponseEntity<Object[]> getAllProjects() {
-        ResponseEntity<Object[]> projectResponse= projectService.getAllProjects();
+    public ResponseEntity<Object[]> getAllProjects(String privateToken) {
+        ResponseEntity<Object[]> projectResponse= projectService.getAllProjects(privateToken);
         return projectResponse;
     }
 

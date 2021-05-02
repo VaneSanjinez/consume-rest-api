@@ -18,10 +18,16 @@ public class ProjectService {
 
     String baseUrl = Constants.BASE_GITLAB_URL;
 
-    public ResponseEntity<Object[]> getAllProjects() {
+    public ResponseEntity<Object[]> getAllProjects(String privateToken) {
         String url = baseUrl +"projects/";
+//        RestTemplate restTemplate = new RestTemplate();
+//        HttpEntity request = generalUtil.setHeaderToRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Private-Token",privateToken);
+        HttpEntity request = new HttpEntity(headers);
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity request = generalUtil.setHeaderToRestTemplate();
 
         ResponseEntity<Object[]> response = restTemplate.exchange(
                 url,

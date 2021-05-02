@@ -16,9 +16,9 @@ public class ProjectController {
     ProjectUtil projectUtil;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Object[]> getAllProjects(){
+    public ResponseEntity<Object[]> getAllProjects(String privateToken){
         ResponseEntity<Object[]> response;
-        response = projectUtil.getAllProjects();
+        response = projectUtil.getAllProjects(privateToken);
         System.out.println(response);
         return response;
     }
