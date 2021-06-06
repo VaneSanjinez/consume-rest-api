@@ -19,7 +19,7 @@ public class CommitsService {
 
     String baseUrl = Constants.BASE_GITLAB_URL;
     public ResponseEntity<Object[]> getCommitsByProjectId(int projectId, String privateToken) {
-        String url = baseUrl + "projects/" + projectId + "/repository/commits";
+        String url = baseUrl + "projects/" + projectId + "/repository/commits?per_page=100";
         System.out.println(url);
 
         UriComponentsBuilder builder = generalUtil.setPrivateToken(url,privateToken);
